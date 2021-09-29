@@ -1,7 +1,7 @@
-var path,boy,cash,diamonds,jwellery,sword;
-var pathImg,boyImg,cashImg,diamondsImg,jwelleryImg,swordImg;
+var path,boy,cash,diamonds,jewelry,sword;
+var pathImg,boyImg,cashImg,diamondsImg,jewelryImg,swordImg;
 var treasureCollection = 0;
-var cashG,diamondsG,jwelleryG,swordGroup;
+var cashG,diamondsG,jewelryG,swordGroup;
 
 //Estados do Jogo
 var PLAY=1;
@@ -13,7 +13,7 @@ function preload(){
   boyImg = loadAnimation("Runner-1.png","Runner-2.png");
   cashImg = loadImage("cash.png");
   diamondsImg = loadImage("diamonds.png");
-  jwelleryImg = loadImage("jwell.png");
+  jewelryImg = loadImage("jwell.png");
   swordImg = loadImage("sword.png");
   endImg =loadAnimation("fimdeJogo.png");
 }
@@ -21,7 +21,7 @@ function preload(){
 function setup(){
   
   createCanvas(400,600);
-// Movendo o fundo
+// Movendo fundo
 path=createSprite(200,200);
 path.addImage(pathImg);
 path.velocityY = 4;
@@ -35,7 +35,7 @@ boy.scale=0.08;
   
 cashG=new Group();
 diamondsG=new Group();
-jwelleryG=new Group();
+jewelryG=new Group();
 swordGroup=new Group();
 
 }
@@ -56,7 +56,7 @@ function draw() {
   
     createCash();
     createDiamonds();
-    createJwellery();
+    createjewelry();
     createSword();
 
     if (cashG.isTouching(boy)) {
@@ -65,22 +65,61 @@ function draw() {
     }
     else if (diamondsG.isTouching(boy)) {
       diamondsG.destroyEach();
-
+      treasureCollection=treasureCollection+100;
       
-    }else if(jwelleryG.isTouching(boy)) {
-      jwelleryG.destroyEach();
+    }else if(jewelryG.isTouching(boy)) {
+      jewelryG.destroyEach();
 
+      // treasureCollection=+ 150;
+      // treasureCollection= 150;
+      // treasureCollection= treasureCollection - 150;
+      // treasureCollection= treasureCollection + 150;
       
     }else{
       if(swordGroup.isTouching(boy)) {
+        gameState=END;
+        
+        // boy.addAnimation(endImg);
+        // boy.addAnimation("SahilRunning",endImg);
+        // boy.addAnimation("SahilRunning");
+        // boy.addAnimation(SahilRunning,endImg);
 
+        boy.x=200;
+        boy.y=300;
+        boy.scale=0.6;
+        
+        // cashG.destroyEach;
+        // diamondsG.destroyEach;
+        // jewelryG.destroyEach;
+        // swordGroup.destroyEach;
+
+        // cashG.destroy();
+        // diamondsG.destroy();
+        // jewelryG.destroy();
+        // swordGroup.destroy();
+        
+        // cashG.destroyEach();
+        // diamondsG.destroyEach();
+        // jewelryG.destroyEach();
+        // swordGroup.destroyEach();
+        
+        // cashGdestroyEach();
+        // diamondsGdestroyEach();
+        // jewelryGdestroyEach();
+        // swordGroupdestroyEach();
+        
+        cashG.setVelocityYEach(0);
+        diamondsG.setVelocityYEach(0);
+        jewelryG.setVelocityYEach(0);
+        swordGroup.setVelocityYEach(0);
+     
     }
   }
   
   drawSprites();
   textSize(20);
   fill(255);
-  text("Treasure: "+ treasureCollection,150,30);
+  text("Tesouro: "+ treasureCollection,10,30);
   }
 
 }
@@ -107,14 +146,14 @@ function createDiamonds() {
 }
 }
 
-function createJwellery() {
+function createjewelry() {
   if (World.frameCount % 410 == 0) {
-  var jwellery = createSprite(Math.round(random(50, 350),40, 10, 10));
-  jwellery.addImage(jwelleryImg);
-  jwellery.scale=0.13;
-  jwellery.velocityY = 3;
-  jwellery.lifetime = 150;
-  jwelleryG.add(jwellery);
+  var jewelry = createSprite(Math.round(random(50, 350),40, 10, 10));
+  jewelry.addImage(jewelryImg);
+  jewelry.scale=0.13;
+  jewelry.velocityY = 3;
+  jewelry.lifetime = 150;
+  jewelryG.add(jewelry);
   }
 }
 
